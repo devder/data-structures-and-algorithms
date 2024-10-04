@@ -34,10 +34,28 @@ function maxSubArraySum(arr: number[], consecutiveNum: number) {
 }
 
 function findLongestSubstring(str: string) {
-  if (!str.length) return 0;
+  let charIndexMap: Record<string, number> = {}; // Object to store the index of characters
+  let maxLength = 0; // Store the length of the longest substring
+  let left = 0; // Start of the sliding window
 
-  // store the temp longest value
-  let foundMax = 0;
+  // Iterate through the string
+  for (let right = 0; right < str.length; right++) {
+    let currentChar = str[right];
+
+    // If character is already in the object and within the current window
+    if (charIndexMap[currentChar] >= left) {
+      // Move the left pointer to the right of the last occurrence
+      left += 1;
+    }
+
+    // Update the character's latest index
+    charIndexMap[currentChar] = right;
+
+    // Calculate the current window length and update maxLength
+    maxLength = Math.max(maxLength, right - left + 1);
+  }
+
+  return maxLength;
 }
 
 // Test cases
