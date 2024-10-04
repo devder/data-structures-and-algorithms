@@ -1,7 +1,7 @@
 /**
  * ### Divide and Conquer
 
-- This pattern involves dividing a data set into smaller chunks and then repeating a process with a subset of data.
+- This pattern involves dividing a data set into smaller chunks and then repeating a process with a subset of data. Must be used on a sorted array
 - This pattern can tremendously decrease time complexity.
 - ex: using a function named search that takes an array and a value and returns the index where the value is located in the array. If the value is not found, the function returns -1.
  */
