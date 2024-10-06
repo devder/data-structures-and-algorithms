@@ -28,3 +28,9 @@ arr.sort(numberCompare); // [4, 6, 10, 15]
 - A sorting algorithm where the largest values bubble up to the top.
 - it is not commonly used
 - it works by repeatedly swapping the adjacent elements if they are in the wrong order.
+- Time complexity: O(n^2)
+
+### Selection Sort
+
+- Similar to bubble sort, but instead of first placing large values into sorted position, it places small values into sorted position.
+- Time complexity: O(n^2)
