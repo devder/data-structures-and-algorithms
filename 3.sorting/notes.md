@@ -29,8 +29,16 @@ arr.sort(numberCompare); // [4, 6, 10, 15]
 - it is not commonly used
 - it works by repeatedly swapping the adjacent elements if they are in the wrong order.
 - Time complexity: O(n^2)
+- Works well when the data is nearly sorted
 
 ### Selection Sort
 
 - Similar to bubble sort, but instead of first placing large values into sorted position, it places small values into sorted position.
 - Time complexity: O(n^2)
+- Works well when memory space is a concern
+
+### Insertion Sort
+
+- Builds up the sort by gradually creating a larger left half which is always sorted.
+- Time complexity: O(n^2)
+- Works well when numbers are added to a list one at a time

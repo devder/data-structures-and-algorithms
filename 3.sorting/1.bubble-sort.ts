@@ -1,3 +1,9 @@
+/**
+ * - start looping with a variable called i, at the end of the array towards the beginning
+ * - start inner loop with a variable called j, from the beginning until i - 1
+ * - if arr[j] is greater than arr[j + 1], swap those two values
+ */
+
 // ES5
 function bubbleSort1(arr: number[]) {
   let noSwaps = false;

@@ -1,26 +1,26 @@
-// function loopFactorial(num: number) {
-//   let total = 1;
+function loopFactorial(num: number) {
+  let total = 1;
 
-//   for (let i = num; i > 1; i--) {
-//     total *= i;
-//   }
+  for (let i = num; i > 1; i--) {
+    total *= i;
+  }
 
-//   return total;
-// }
+  return total;
+}
 
-// function recursiveFactorial(num: number): number {
-//   if (num <= 1) return 1;
+function recursiveFactorial(num: number): number {
+  if (num <= 1) return 1;
 
-//   return num * recursiveFactorial(num - 1);
-// }
+  return num * recursiveFactorial(num - 1);
+}
 
-// function getMaxCallStackSize(): number {
-//   try {
-//     return 1 + getMaxCallStackSize();
-//   } catch (e) {
-//     return 1;
-//   }
-// }
+function getMaxCallStackSize(): number {
+  try {
+    return 1 + getMaxCallStackSize();
+  } catch (e) {
+    return 1;
+  }
+}
 
 function fib(n: number) {
   const arr = [1, 1];
