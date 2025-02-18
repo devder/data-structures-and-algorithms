@@ -35,3 +35,5 @@ function same(arr1: Array<number>, arr2: number[]) {
 
 const res = same([1, 2, 3, 2], [9, 1, 4, 4]);
 console.log(res);
+
+// to do: ANAGRAMS

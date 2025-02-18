@@ -23,6 +23,9 @@ function getMaxCallStackSize(): number {
 }
 
 function fib(n: number) {
+  if (n <= 0) return 0;
+  if (n === 1) return 1;
+
   const arr = [1, 1];
 
   //  add the two numbers
@@ -30,7 +33,7 @@ function fib(n: number) {
   //  push it to the array
   //  do it n - 1 times
 
-  for (let i = 1; i < n - 1; i++) {
+  for (let i = 2; i < n; i++) {
     const item = arr[arr.length - 1] + arr[arr.length - 2];
     arr.push(item);
   }
@@ -38,9 +41,9 @@ function fib(n: number) {
   return arr[arr.length - 1];
 }
 
-function fib2(n: number) {
-  if (n <= 1) return 1;
-  return fib(n - 1) + fib(n - 2);
+function fib2(n: number): number {
+  if (n <= 1) return n;
+  return fib2(n - 1) + fib2(n - 2);
 }
 
 function isPalindrome(str: string) {
