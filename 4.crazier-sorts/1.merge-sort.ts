@@ -74,3 +74,49 @@ const mergeSort = (arr: number[]): number[] => {
 };
 
 // console.log(mergeSort([15, 13, 12, 1, 11, 15, 19, 4, 5, 6]));
+
+/**
+ * Sorting Exercise - merge helper
+   Given two sorted arrays, write a function called merge which accepts two SORTED arrays and returns a new array with both of the values from each array sorted.
+   This function should run in O(n + m) time and O(n + m) space and should not modify the parameters passed to it.
+   As before, the function should default to sorting numbers in ascending order. If you pass in a comparator function as a third argument, this comparator is what will be used. (Note that the input arrays will always be sorted according to the comparator!)
+   Also, do not use the built in .sort method! We're going to use this helper to implement a sort, so the helper itself shouldn't depend on a sort.
+ */
+function merge2(
+  arr1: (string | number)[],
+  arr2: (string | number)[],
+  comparator?: (v1: any, v2: any) => number
+) {
+  if (!comparator) {
+    comparator = (a, b) => a - b;
+  }
+  let i = 0;
+  let j = 0;
+  const result = [];
+  while (i < arr1.length && j < arr2.length) {
+    if (comparator(arr1[i], arr2[j]) <= 0) {
+      result.push(arr1[i]);
+      i++;
+    } else {
+      result.push(arr2[j]);
+      j++;
+    }
+  }
+  while (i < arr1.length) {
+    result.push(arr1[i]);
+    i++;
+  }
+  while (j < arr2.length) {
+    result.push(arr2[j]);
+    j++;
+  }
+  return result;
+}
+
+const names = ["Bob", "Ethel", "Christine"];
+const otherNames = ["M", "Colt", "Allison", "SuperLongNameOMG"];
+
+function stringLengthComparator(str1: string, str2: string) {
+  return str1.length - str2.length;
+}
+console.log(merge2(names, otherNames));
