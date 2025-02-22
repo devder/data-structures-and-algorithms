@@ -1,7 +1,7 @@
 // merge sort works by taking an array and splitting it in halves until we have arrays of one element each
 // then we keep comparing and merging the values in the array till we have one array back
 /**
- * time complexity = O(n log n)
+ * time complexity = O(n log n) - best, avg, worst
  * space complexity = O(n)
  * if there are 8 items, the split is done 3, if there are 32 items, the splitting is done 5
  * which is 2 ^ 3 and 2 ^ 5 respectively and that translates to log n
