@@ -20,6 +20,7 @@ class SinglyLinkedList {
   length: number = 0;
   constructor() {}
 
+  // add to end
   push(val: any) {
     const newNode = new Node(val);
     if (!this.head) {
@@ -33,6 +34,7 @@ class SinglyLinkedList {
     return this;
   }
 
+  // remove the last node
   pop() {
     if (!this.head) return undefined;
     let current = this.head;
@@ -52,10 +54,39 @@ class SinglyLinkedList {
     }
     return current;
   }
+
+  // remove the first node
+  shift() {
+    if (!this.head) return undefined;
+    const current = this.head;
+    if (!current.next) {
+      this.tail = null;
+    }
+
+    this.head = current.next;
+    current.next = null;
+    this.length--;
+    return current;
+  }
+
+  // add to the begin
+  unShift(val: any) {
+    const newNode = new Node(val);
+    if (!this.head) {
+      this.head = newNode;
+      this.tail = newNode;
+    } else {
+      newNode.next = this.head;
+      this.head = newNode;
+    }
+
+    this.length++;
+    return this;
+  }
 }
 
 const l1 = new SinglyLinkedList();
-l1.push("one");
-l1.push("two");
-l1.push("three");
-console.log(l1.pop());
+// l1.push("two");
+// l1.push("three");
+// console.log(l1.shift());
+console.log(l1.unShift("one"));
