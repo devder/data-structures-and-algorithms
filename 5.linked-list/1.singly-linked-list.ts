@@ -9,6 +9,12 @@
  * - 12(head) -> 15 -> 16 -> 25(tail)
  */
 
+const stringify = (val: any) => {
+  console.log(JSON.stringify(val, null, 2));
+};
+const log = (val: any) => {
+  console.log(val);
+};
 class Node {
   next: Node | null = null;
   constructor(public val: any) {}
@@ -83,10 +89,36 @@ class SinglyLinkedList {
     this.length++;
     return this;
   }
+
+  // get a node at an index
+  get(index: number) {
+    if (index < 0 || index >= this.length) return undefined;
+
+    let current = this.head;
+    for (let i = 1; i <= index; i++) {
+      current = current?.next!;
+    }
+    return current;
+  }
+
+  // change the value at an index
+  set(index: number, val: any) {
+    const foundNode = this.get(index);
+    if (foundNode) {
+      foundNode.val = val;
+      return true;
+    }
+    return false;
+  }
 }
 
 const l1 = new SinglyLinkedList();
-// l1.push("two");
-// l1.push("three");
-// console.log(l1.shift());
-console.log(l1.unShift("one"));
+l1.push("one");
+l1.push("two");
+l1.push("three");
+// log(l1.shift());
+// log(l1.unShift("one"));
+// log(l1.get(0));
+// log(l1.set(2, 12));
+l1.set(1, "zero");
+log(l1.get(1));
