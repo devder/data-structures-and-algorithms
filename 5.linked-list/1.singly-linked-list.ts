@@ -137,6 +137,26 @@ class SinglyLinkedList {
     this.length--;
     return true;
   }
+
+  // reverse the linked list in place
+  // [1 -> 2 -> 3 -> 4]
+  // [4 -> 3 -> 2 -> 1]
+  reverse() {
+    console.log("this >", this);
+    let current = this.head;
+    this.head = this.tail;
+    this.tail = current;
+
+    let prev = null;
+    let next = null;
+    for (let i = 0; i < this.length; i++) {
+      next = current.next;
+      current.next = prev;
+      prev = current;
+      current = next;
+    }
+    return this;
+  }
 }
 
 const l1 = new SinglyLinkedList();
@@ -150,5 +170,6 @@ l1.push("three");
 // l1.set(1, "zero");
 // log(l1.get(1));
 // stringify(l1.insert(3, "bool"));
-log(l1.remove(1));
-log(l1);
+// log(l1.remove(1));
+// stringify(l1.reverse());
+l1.reverse();
