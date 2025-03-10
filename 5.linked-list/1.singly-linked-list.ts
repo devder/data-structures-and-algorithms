@@ -2,6 +2,11 @@
 // Linked Lists consists of nodes, and each node has a value and a pointer to another Node or null
 /**
  * Singly Linked List
+ * Big O
+ * insertion - O(1)
+ * removal - O(1) from the end/beginning, O(n) from the middle
+ * searching/access - O(n)
+ * ATTR
  * - Do not have indexes
  * - Connected via nodes with a next pointer
  * - Random access is not allowed, must traverse from the beginning (head) to find a node
@@ -157,12 +162,29 @@ class SinglyLinkedList {
     }
     return this;
   }
+
+  // rotate the node a given number of times
+  // [ 1 > 2 > 3 > 4] -> [2 > 3 > 4 > 1]
+  rotate(n: number) {
+    const trueN = ((n % this.length) + this.length) % this.length;
+    if (trueN === 0 || this.length < 2) return this;
+    let cur = this.tail;
+    cur.next = this.head;
+    for (let i = 0; i < trueN; i++) {
+      cur = cur.next;
+    }
+    this.tail = cur;
+    this.head = cur.next;
+    this.tail.next = null;
+    return this;
+  }
 }
 
 const l1 = new SinglyLinkedList();
 l1.push("one");
 l1.push("two");
 l1.push("three");
+l1.push("four");
 // log(l1.shift());
 // log(l1.unShift("one"));
 // log(l1.get(0));
@@ -172,4 +194,4 @@ l1.push("three");
 // stringify(l1.insert(3, "bool"));
 // log(l1.remove(1));
 // stringify(l1.reverse());
-l1.reverse();
+l1.rotate(2);
