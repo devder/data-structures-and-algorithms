@@ -29,7 +29,7 @@ class Node {
 class SinglyLinkedList {
   head: Node | null = null;
   tail: Node | null = null;
-  length: number = 0;
+  length = 0;
   constructor() {}
 
   // add to end
@@ -37,11 +37,10 @@ class SinglyLinkedList {
     const newNode = new Node(val);
     if (!this.head) {
       this.head = newNode;
-      this.tail = newNode;
     } else {
       this.tail.next = newNode;
-      this.tail = newNode;
     }
+    this.tail = newNode;
     this.length++;
     return this;
   }
@@ -147,7 +146,6 @@ class SinglyLinkedList {
   // [1 -> 2 -> 3 -> 4]
   // [4 -> 3 -> 2 -> 1]
   reverse() {
-    console.log("this >", this);
     let current = this.head;
     this.head = this.tail;
     this.tail = current;
