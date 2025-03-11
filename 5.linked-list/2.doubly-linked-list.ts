@@ -82,11 +82,44 @@ class DoublyLinkedList {
     this.length++;
     return this;
   }
+
+  get(index: number) {
+    if (index < 0 || index >= this.length) return undefined;
+    const startFromFront = index <= this.length / 2;
+    // [1 -> 2 -> 3]
+    let current: Node;
+    if (startFromFront) {
+      current = this.head;
+      for (let i = 1; i <= index; i++) {
+        current = current.next;
+      }
+    } else {
+      console.log("other");
+      current = this.tail;
+      for (let i = this.length - 1; i > index; i--) {
+        current = current.prev;
+      }
+    }
+
+    return current;
+  }
+
+  // change the value at an index
+  set(index: number, val: any) {
+    const foundNode = this.get(index);
+    if (foundNode) {
+      foundNode.val = val;
+      return true;
+    }
+    return false;
+  }
 }
 
 const l2 = new DoublyLinkedList();
 l2.push("one");
 l2.push("two");
 l2.push("three");
+l2.push("four");
 
-log(l2.unshift("zero"));
+l2.set(3, "fab");
+log(l2);
