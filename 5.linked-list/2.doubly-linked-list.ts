@@ -7,9 +7,6 @@
  * - It is more flexible than a singly linked list bc is has a prev and next pointer but it consumes more memory
  */
 
-const stringify = (val) => {
-  console.log(JSON.stringify(val, null, 2));
-};
 const log = (val) => {
   console.log(val);
 };
@@ -53,13 +50,43 @@ class DoublyLinkedList {
     this.length--;
     return node;
   }
+
+  // remove from the beginning
+  shift() {
+    if (!this.head) return undefined;
+    const node = this.head;
+    if (!node.next) {
+      this.tail = null;
+    } else {
+      node.next.prev = null;
+    }
+
+    this.head = node.next;
+    node.next = null;
+    this.length--;
+    return node;
+  }
+
+  // add to the begin
+  unshift(val: any) {
+    const newNode = new Node(val);
+    if (!this.head) {
+      this.head = newNode;
+      this.tail = newNode;
+    } else {
+      const oldHead = this.head;
+      oldHead.prev = newNode;
+      newNode.next = oldHead;
+      this.head = newNode;
+    }
+    this.length++;
+    return this;
+  }
 }
 
 const l2 = new DoublyLinkedList();
 l2.push("one");
 l2.push("two");
-// l2.push("three");
-// l2.push("four");
+l2.push("three");
 
-log(l2.pop());
-log(l2);
+log(l2.unshift("zero"));
