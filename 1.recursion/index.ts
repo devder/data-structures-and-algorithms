@@ -23,24 +23,27 @@ function getMaxCallStackSize(): number {
 }
 
 function fib(n: number) {
-  if (n <= 0) return 0;
-  if (n === 1) return 1;
-
+  if (n <= 2) return 1;
   const arr = [1, 1];
-
-  //  add the two numbers
-  //  get the result of the addition
-  //  push it to the array
-  //  do it n - 1 times
-
   for (let i = 2; i < n; i++) {
     const item = arr[arr.length - 1] + arr[arr.length - 2];
     arr.push(item);
   }
-
   return arr[arr.length - 1];
 }
 
+// this version saves memory and space complexity is 0(1)
+function fibOptimal(n: number) {
+  if (n <= 2) return 1;
+  let prev = 1,
+    curr = 1;
+  for (let i = 3; i <= n; i++) {
+    [prev, curr] = [curr, prev + curr];
+  }
+  return curr;
+}
+
+// bad algorithm - time complexity is O(2**n) - this is worse than quadratic O(n**2)
 function fib2(n: number): number {
   if (n <= 1) return n;
   return fib2(n - 1) + fib2(n - 2);
@@ -165,3 +168,50 @@ function stringifyNumbers(obj: Record<string, any>): Record<string, any> {
 
   return newObj;
 }
+
+function floodFill(arr: number[][], sr: number, sc: number, newColor: number) {
+  const currentColor = arr[sr][sc];
+  if (arr.length == 0 || currentColor == newColor) {
+    return arr;
+  }
+  const rowLen = arr.length;
+  const colLen = arr[0].length;
+
+  const traverse = (r: number, c: number) => {
+    if (
+      r < 0 ||
+      r >= rowLen ||
+      c < 0 ||
+      c >= colLen ||
+      currentColor != arr[r][c]
+    ) {
+      return;
+    }
+    arr[r][c] = newColor;
+
+    traverse(r - 1, c); // up
+    traverse(r + 1, c); // down
+    traverse(r, c - 1); // left
+    traverse(r, c + 1); // right
+  };
+
+  traverse(sr, sc);
+
+  return arr;
+}
+
+const arr = [
+  [1, 1, 1],
+  [1, 1, 0],
+  [1, 0, 1],
+  [1, 1, 1],
+  [1, 1, 0],
+  [1, 0, 1],
+  [0, 0, 1],
+  [1, 1, 0],
+  [1, 0, 1],
+  [1, 1, 0],
+  [1, 1, 0],
+  [1, 0, 1],
+];
+console.log(floodFill(arr, 1, 1, 2));

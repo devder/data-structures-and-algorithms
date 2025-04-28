@@ -36,4 +36,82 @@ function same(arr1: Array<number>, arr2: number[]) {
 const res = same([1, 2, 3, 2], [9, 1, 4, 4]);
 console.log(res);
 
-// to do: ANAGRAMS
+// Example 1:
+
+// Input: nums = [0,1]
+// Output: 2
+// Explanation: [0, 1] is the longest contiguous subarray with an equal number of 0 and 1.
+
+function findMaxLength(nums: number[]): number {
+  const map = new Map<number, number>();
+  map.set(0, -1); // Initialize with sum 0 at index -1
+  let maxLength = 0;
+  let sum = 0;
+
+  for (let i = 0; i < nums.length; i++) {
+    // Treat 0 as -1
+    sum += nums[i] === 0 ? -1 : 1;
+
+    if (map.has(sum)) {
+      // If the sum has been seen before, calculate the length of the subarray
+      maxLength = Math.max(maxLength, i - map.get(sum));
+    } else {
+      // Otherwise, store the first occurrence of this sum
+      map.set(sum, i);
+    }
+  }
+  return maxLength;
+}
+
+function anagram(s: string, t: string) {
+  if (s.length != t.length) return false;
+  // create a map of the occurrences of each character in s by looping
+  // check if they exist in character t
+
+  const freq = new Map<string, number>();
+  const freq2 = new Map<string, number>();
+  for (const char of s) {
+    let v = freq.get(char);
+    freq.set(char, v ? ++v : 1);
+  }
+
+  for (const char of t) {
+    let v = freq2.get(char);
+    freq2.set(char, v ? ++v : 1);
+  }
+
+  for (const [k] of freq) {
+    if (freq.get(k) != freq2.get(k)) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+function sortString(s: string) {
+  return s.split("").sort().join("");
+}
+
+function groupAnagrams(strs: string[]): string[][] {
+  // sort these strings, and make each unique key the key,
+  const wordMap: Record<string, string[]> = {};
+  const output = [];
+  // and the value will be an array of similar words
+  for (const str of strs) {
+    const sorted = sortString(str);
+    if (!wordMap[sorted]) {
+      wordMap[sorted] = [str];
+    } else {
+      wordMap[sorted].push(str);
+    }
+  }
+  // create an output and return the value of each unique keys
+  for (const key in wordMap) {
+    output.push(wordMap[key]);
+  }
+  return output;
+}
+
+console.log(groupAnagrams(["eat", "tea", "tan", "ate", "nat", "bat"]));
+console.log(anagram("car", "car"));
